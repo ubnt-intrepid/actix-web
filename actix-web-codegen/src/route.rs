@@ -186,13 +186,14 @@ impl Route {
         let name = &self.name;
         let resource_name = name.to_string();
         let guard = &self.guard;
+        let vis = &self.ast.vis;
         let ast = &self.ast;
         let path = &self.args.path;
         let extra_guards = &self.args.guards;
         let resource_type = &self.resource_type;
         let stream = quote! {
             #[allow(non_camel_case_types, missing_docs)]
-            pub struct #name;
+            #vis struct #name;
 
             impl actix_web::dev::HttpServiceFactory for #name {
                 fn register(self, __config: &mut actix_web::dev::AppService) {
